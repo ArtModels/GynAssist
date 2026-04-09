@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+/* ─── Design Tokens (Dark – default) ────────────────────────── */
+:root {
+  /* Backgrounds */
+  --bg-primary:       #050d1a;
+  --bg-secondary:     #0a1628;
+  --bg-card:          rgba(10, 22, 40, 0.7);
+  --glass:            rgba(255, 255, 255, 0.04);
+  --glass-border:     rgba(255, 255, 255, 0.08);
+  --glass-hover:      rgba(255, 255, 255, 0.07);
+
+  /* Accents */
+  --accent-teal:      #00c9a7;
+  --accent-teal-dim:  rgba(0, 201, 167, 0.15);
+  --accent-teal-glow: rgba(0, 201, 167, 0.25);
+  --accent-blue:      #4a9eff;
+  --accent-blue-dim:  rgba(74, 158, 255, 0.1);
+
+  /* Text */
+  --text-primary:     #e8f0fe;
+  --text-secondary:   #8fa8c8;
+  --text-muted:       #4a6280;
+
+  /* Semantic */
+  --success:          #00c9a7;
+  --warning:          #f5a623;
+  --danger:           #ff4d6d;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Shadows */
+  --shadow-glass: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --shadow-teal:  0 0 40px rgba(0, 201, 167, 0.12);
+  --shadow-card:  0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Light Mode Tokens ──────────────────────────────────────── */
+[data-theme="light"] {
+  /* Backgrounds — pure clinical whites */
+  --bg-primary:       #f0f6ff;
+  --bg-secondary:     #e4eef9;
+  --bg-card:          rgba(255, 255, 255, 0.80);
+
+  /* Glassmorphism adapted to light: frosted white panels */
+  --glass:            rgba(255, 255, 255, 0.60);
+  --glass-border:     rgba(0, 80, 160, 0.12);
+  --glass-hover:      rgba(255, 255, 255, 0.85);
+
+  /* Teal — keeps the brand identity in both modes */
+  --accent-teal:      #00a887;
+  --accent-teal-dim:  rgba(0, 168, 135, 0.12);
+  --accent-teal-glow: rgba(0, 168, 135, 0.20);
+
+  /* Deep clinical blue as secondary accent */
+  --accent-blue:      #0064b4;
+  --accent-blue-dim:  rgba(0, 100, 180, 0.10);
+
+  /* High-contrast text on white — azul clínico profundo */
+  --text-primary:     #0b1f3a;
+  --text-secondary:   #3a5a80;
+  --text-muted:       #7a9ab8;
+
+  /* Semantic — adjusted for light backgrounds */
+  --success:          #00a887;
+  --warning:          #c47a0a;
+  --danger:           #d63050;
+
+  /* Softer shadows on light */
+  --shadow-glass: 0 8px 32px rgba(0, 40, 100, 0.10);
+  --shadow-teal:  0 0 40px rgba(0, 168, 135, 0.10);
+  --shadow-card:  0 4px 24px rgba(0, 40, 100, 0.08);
+}
+
+/* ─── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background 0.35s ease, color 0.35s ease;
+}
+
+/* ─── Scrollbar Premium ──────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 201, 167, 0.25);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 201, 167, 0.45);
+}
+
+/* ─── Background Gradient ────────────────────────────────────── */
+.app-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Dark gradient */
+:root:not([data-theme="light"]) .app-bg {
+  background:
+    radial-gradient(ellipse 80% 50% at 10% 0%, rgba(0, 80, 120, 0.35) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 90% 100%, rgba(0, 100, 80, 0.25) 0%, transparent 60%),
+    linear-gradient(180deg, #050d1a 0%, #030810 100%);
+}
+
+/* Light gradient — clinical azure-white */
+[data-theme="light"] .app-bg {
+  background:
+    radial-gradient(ellipse 70% 50% at 15% 0%, rgba(0, 120, 200, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 45% at 85% 100%, rgba(0, 168, 135, 0.10) 0%, transparent 60%),
+    linear-gradient(180deg, #f0f6ff 0%, #e8f2fb 100%);
+}
+
+/* ─── Glass Utility ──────────────────────────────────────────── */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.4; transform: scale(0.7); }
+}
+
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 20px var(--accent-teal-glow); }
+  50%       { box-shadow: 0 0 40px var(--accent-teal-glow), 0 0 80px rgba(0, 201, 167, 0.1); }
+}

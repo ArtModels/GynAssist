@@ -1,0 +1,23 @@
+.app-shell {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.app-workspace {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+  animation: fade-in-up 0.4s ease;
+}
+
+/* ThemeToggle fixed top-right */
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1.25rem;
+  z-index: 500;
+}

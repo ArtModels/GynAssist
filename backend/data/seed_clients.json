@@ -1,0 +1,50 @@
+[
+    {
+        "client_id": "paciente-001",
+        "name": "Elena Rodríguez",
+        "edad": 28,
+        "ocupacion": "Diseñadora Gráfica",
+        "motivo_consulta": "Control prenatal primer trimestre",
+        "antecedentes_go": {
+            "gestas": 2,
+            "partos": 1,
+            "cesareas": 0,
+            "abortos": 0,
+            "hijos_vivos": 1
+        },
+        "fum": "2026-01-15",
+        "notas_relevantes": "Paciente con Rh negativo. Parto previo sin complicaciones hace 3 años. Refiere náuseas leves matutinas."
+    },
+    {
+        "client_id": "paciente-002",
+        "name": "Marta Jiménez",
+        "edad": 45,
+        "ocupacion": "Docente",
+        "motivo_consulta": "Check-up anual y mastografía",
+        "antecedentes_go": {
+            "gestas": 0,
+            "partos": 0,
+            "cesareas": 0,
+            "abortos": 0,
+            "hijos_vivos": 0
+        },
+        "fum": "2026-03-20",
+        "notas_relevantes": "Antecedente heredofamiliar: Madre con cáncer de mama a los 50 años. Fumadora social (3 cigarrillos/día). Busca asesoría sobre climaterio."
+    },
+    {
+        "client_id": "paciente-003",
+        "name": "Sofía García",
+        "edad": 19,
+        "ocupacion": "Estudiante",
+        "motivo_consulta": "Dolor pélvico agudo",
+        "antecedentes_go": {
+            "gestas": 0,
+            "partos": 0,
+            "cesareas": 0,
+            "abortos": 0,
+            "hijos_vivos": 0
+        },
+        "fum": "2026-02-10",
+        "notas_relevantes": "Vida sexual activa sin método anticonceptivo de barrera. Refiere dolor en fosa ilíaca derecha de 24 horas de evolución."
+    }
+]
