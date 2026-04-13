@@ -22,7 +22,11 @@ app.add_middleware(
 app.include_router(clients_router.router, prefix="/api")
 app.include_router(agent_router.router, prefix="/api")
 
-@app.get("/health")
+@app.get("/")
+def root():
+    return {"message": "GynAssist API is running. Check /docs for documentation."}
+
+@app.get("/api/health")
 def health_check():
     """Verificación de estado de la API"""
     return {"status": "ok", "service": "GynAssist"}
