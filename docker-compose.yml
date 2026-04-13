@@ -20,11 +20,17 @@ services:
       context: ./frontend
       dockerfile: Dockerfile
       args:
-        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        # Estas variables se inyectan durante la construcción (build time)
         - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
+        - VITE_FIREBASE_AUTH_DOMAIN=${VITE_FIREBASE_AUTH_DOMAIN}
+        - VITE_FIREBASE_PROJECT_ID=${VITE_FIREBASE_PROJECT_ID}
+        - VITE_FIREBASE_STORAGE_BUCKET=${VITE_FIREBASE_STORAGE_BUCKET}
+        - VITE_FIREBASE_MESSAGING_SENDER_ID=${VITE_FIREBASE_MESSAGING_SENDER_ID}
+        - VITE_FIREBASE_APP_ID=${VITE_FIREBASE_APP_ID}
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     container_name: gynassist-frontend
     ports:
-      - "8082:80" # Cambiamos el puerto de la izquierda (VPS) al 8082
+      - "8082:80"
     environment:
       - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     restart: always
