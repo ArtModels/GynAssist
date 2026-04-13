@@ -9,18 +9,18 @@ app = FastAPI(
 )
 
 # Configuración de CORS
-# En producción, cambia "*" por la URL de tu frontend (ej. https://gynassist.com)
+# Permitimos todos en desarrollo, pero en producción Dokploy inyectamos el origen específico
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"], # Permitimos temporalmente "*" para evitar bloqueos en el despliegue inicial
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Inclusión de rutas
-app.include_router(clients_router.router)
-app.include_router(agent_router.router)
+# Inclusión de rutas con prefijo global /api
+app.include_router(clients_router.router, prefix="/api")
+app.include_router(agent_router.router, prefix="/api")
 
 @app.get("/health")
 def health_check():
