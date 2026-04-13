@@ -12,8 +12,9 @@ security = HTTPBearer()
 # Pero por seguridad, si no hay apps, inicializamos aquí.
 try:
     if not firebase_admin._apps:
-        cred_path = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "./firebase-service-account.json")
-        cred = credentials.Certificate(cred_path)
+        from config import get_settings
+        settings = get_settings()
+        cred = settings.get_firebase_credentials()
         firebase_admin.initialize_app(cred)
 except Exception as e:
     print(f"Error al inicializar Firebase Admin en auth.py: {e}")
