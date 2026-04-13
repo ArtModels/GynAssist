@@ -5,21 +5,28 @@ services:
       dockerfile: Dockerfile
     container_name: gynassist-backend
     ports:
-      - "8080:8080"
-    # ... otras configuraciones del backend
+      - "8081:8080"
     environment:
       - NODE_ENV=production
-      - PORT=3000
-      - DATABASE_URL=${DATABASE_URL}
+      - PORT=8080
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - TAVILY_API_KEY=${TAVILY_API_KEY}
+      - FIREBASE_PROJECT_ID=${FIREBASE_PROJECT_ID}
+      - GOOGLE_APPLICATION_CREDENTIALS=${GOOGLE_APPLICATION_CREDENTIALS}
     restart: always
 
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_BASE_URL=${VITE_API_BASE_URL}
+        - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
     container_name: gynassist-frontend
     ports:
       - "80:80"
+    environment:
+      - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     restart: always
     depends_on:
       - backend
