@@ -1,33 +1,37 @@
 # Etapa 1: Construcción
 FROM node:20-alpine AS build
 
+# --- AGREGAR ESTO ---
+# Definir los argumentos que recibiremos de docker-compose
+ARG VITE_API_URL
+# Hacer que el argumento esté disponible como variable de entorno durante el build
+ENV VITE_API_URL=$VITE_API_URL
+# --------------------
+
 WORKDIR /app
 
-# Copia archivos de dependencias
 COPY package*.json ./
 RUN npm install
 
-# Copia el código fuente
 COPY . .
 
-# Construye la aplicación
+# Ahora, cuando ejecute build, llevará consigo las variables de entorno
 RUN npm run build
 
 # Etapa 2: Servidor de producción
 FROM nginx:stable-alpine
 
-# Copia los archivos construidos desde la etapa anterior
 COPY --from=build /app/dist /usr/share/nginx/html
 
-# Copia una configuración básica de nginx para manejar el routing de SPA
+# Configuración de nginx (tu script de printf está perfecto para SPA)
 RUN printf "server { \n\
     listen 80; \n\
     location / { \n\
-        root /usr/share/nginx/html; \n\
-        index index.html index.htm; \n\
-        try_files \$uri \$uri/ /index.html; \n\
+    root /usr/share/nginx/html; \n\
+    index index.html index.htm; \n\
+    try_files \$uri \$uri/ /index.html; \n\
     } \n\
-}" > /etc/nginx/conf.d/default.conf
+    }" > /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
