@@ -24,7 +24,7 @@ services:
         - VITE_FIREBASE_API_KEY=${VITE_FIREBASE_API_KEY}
     container_name: gynassist-frontend
     ports:
-      - "80:80"
+      - "8082:80" # Cambiamos el puerto de la izquierda (VPS) al 8082
     environment:
       - VITE_API_BASE_URL=${VITE_API_BASE_URL}
     restart: always
