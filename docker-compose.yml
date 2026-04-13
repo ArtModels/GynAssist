@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: gynassist-backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/.env
+    restart: always
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: gynassist-frontend
+    ports:
+      - "80:80"
+    restart: always
+    depends_on:
+      - backend
