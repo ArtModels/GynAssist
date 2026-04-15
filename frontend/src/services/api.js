@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { auth } from '../firebase';
 
+const BASE = import.meta.env.VITE_API_BASE_URL;
 const api = axios.create({
-    baseURL: `${import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080'}/api`,
+    // Si VITE_API_BASE_URL está vacío → usa /api relativo (Vite proxy lo redirige a :8000)
+    // Si tiene valor (producción) → usa la URL absoluta
+    baseURL: BASE ? `${BASE}/api` : '/api',
 });
 
 // Interceptor para inyectar Token de Firebase

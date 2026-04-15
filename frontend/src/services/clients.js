@@ -40,6 +40,6 @@ export const createAgentStream = async (clientId, message, conversationId = null
     token: token,
     ...(conversationId && { conversation_id: conversationId }),
   });
-  const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080';
+  const baseUrl = import.meta.env.VITE_API_BASE_URL || window.location.origin;
   return new EventSource(`${baseUrl}/api/agent/stream?${params.toString()}`);
 };

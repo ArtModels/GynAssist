@@ -31,12 +31,19 @@ async def get_clients():
     return [doc.to_dict() for doc in docs]
 
 async def create_client(data: dict) -> dict:
-    """Crea un nuevo perfil de paciente en Firestore"""
+    """Crea un nuevo perfil de paciente en Firestore con ID secuencial"""
     db = get_async_db()
-    base_id = _slugify(data["name"])
-    # Ensure unique client_id by appending a timestamp suffix if needed
-    suffix = datetime.utcnow().strftime("%Y%m%d%H%M%S")
-    client_id = f"{base_id}-{suffix}"
+    
+    # Calcular el siguiente número secuencial; protección contra colisiones
+    clients_ref = db.collection("clients")
+    docs = await clients_ref.get()
+    count = len(docs) + 1
+    client_id = f"paciente-{count:03d}"
+
+    # Si por colisión de borrados/reordenamientos ya existe, buscar el siguiente libre
+    while (await clients_ref.document(client_id).get()).exists:
+        count += 1
+        client_id = f"paciente-{count:03d}"
 
     doc = {
         "client_id": client_id,
@@ -55,7 +62,7 @@ async def create_client(data: dict) -> dict:
         },
         "created_at": datetime.utcnow().isoformat(),
     }
-    await db.collection("clients").document(client_id).set(doc)
+    await clients_ref.document(client_id).set(doc)
     return doc
 
 async def delete_client(client_id: str) -> bool:
