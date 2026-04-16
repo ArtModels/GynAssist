@@ -111,4 +111,5 @@ docker-compose up --build
 
 ## 📄 Documentación Adicional
 
-Para más detalles sobre el diseño clínico y decisiones técnicas, consulta el archivo [Caso_De_Uso.md](./Caso_De_Uso.md).
+- **Repositorio**: [https://github.com/ArtModels/GynAssist](https://github.com/ArtModels/GynAssist)
+- Para más detalles sobre el diseño clínico y decisiones técnicas, consulta el archivo [Caso_De_Uso.md](./Caso_De_Uso.md).
